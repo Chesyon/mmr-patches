@@ -1,0 +1,56 @@
+#include <pmdsky.h>
+#include <cot.h>
+#include "extern.h"
+
+#if CUSTOM_SCRIPT_MENUS
+
+int last_selected_scene = 0;
+
+// The initial menu function called to show a keyboard prompt for the player to type in a string.
+// This is intended to be used by a variety of menus.
+void CreateSimpleKeyboardMenu(void) {
+    SetupAndShowKeyboard(GLOBAL_MENU_INFO.id, NULL, NULL);
+}
+
+// The menu function called repeatedly to check if the player has finished entering a string.
+// This is intended to be used by a variety of menus.
+bool UpdateSimpleKeyboardMenu(void) {
+    return IS_BASE_GAME_MENU_FINISHED;
+}
+
+// The Scene Selector logic is mostly handled in the dedicated "playbill.c" file, which has code in Overlay24.
+void CreateSceneSelectorMenu(void) {
+    LoadOverlay(OGROUP_OVERLAY_24);
+    CreatePlaybill();
+}
+
+void CloseSceneSelectorMenu(void) {
+    ClosePlaybill();
+    UnloadOverlay(OGROUP_OVERLAY_24);
+}
+
+
+// Add your custom script menus to the list below.
+// `create` is a pointer to the initial function that will run only once when a custom `message_Menu` runs. This is typically responsible for the initial creation of any windows.
+// `close` is a pointer to the final function that will run only once when a custom `message_Menu` runs. This is typically responsible for the final closing of any windows, as well as setting a return value if not yet set.
+// `update` is pointer to the function that will continously get called every frame when a custom `message_Menu` runs. This is typically responsible for checking the status of any menus and implementing control flow, i.e., "what happens if the player selects an option?"
+// `keyboard_prompt_string_id` is the Text String ID shown when a keyboard prompt is displayed. This may not be necessary for all menus.
+// `keyboard_confirm_string_id` is the Text String ID shown when confirming the player's keyboard input. This may not be necessary for all menus.
+// Custom script menus use ID 80 + <array index>.
+//
+// Refer to menus.h for more information on the fields of `custom_menu` and `global_menu_info`!
+__attribute((used)) struct custom_menu CUSTOM_MENUS[] = {
+    // ID 80
+    // Attempts to add a chosen Pokémon as a new member of Chimecho Assembly!
+    // Returns: Chimecho Assembly index of the new recruit if successful. -1 if the player exits the menu, -2 if a new recruit could not be added.
+    {
+        .create = CreateSceneSelectorMenu,
+        .close = CloseSceneSelectorMenu,
+        .update = UpdateSceneSelectorMenu
+    }
+};
+
+struct global_menu_info GLOBAL_MENU_INFO;
+const int CUSTOM_MENU_AMOUNT = ARRAY_LENGTH(CUSTOM_MENUS);
+
+#endif
