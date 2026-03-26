@@ -41,7 +41,7 @@ __attribute((used)) void CustomGetActingSceneName(char* truncated_scene_name, ch
 	Hijacks a call to CreateDialogueBox to use an entirely new set of window_params, if PERFORMANCE_PROGRESS_LIST[62] is set.
 */
 __attribute((used)) int CustomCreateDialogueBox(struct window_params* window_params) {
-	struct window_params new_params = {0};
+	struct window_params new_params;
 	if (GetPerformanceFlagWithChecks(62)) {
 		uint8_t* buffer = (uint8_t*)&(new_params.x_offset);
 		for (int i = 0; i < 6; i++)
@@ -66,6 +66,7 @@ __attribute((used)) int CustomCreatePortraitBox(enum screen screen, uint32_t pal
 	Changes a currently-loaded font.
 		- "kanji_rd.dat" is the main font in NA EoS.
 		- "unkno_rd.dat" is the Unown font in NA EoS.
+		
 	Any arbitrary font binary can be loaded, so long as it's formatted like the above two files.
 */
 void SwapFont(const char* filepath, bool swap_unkno) {
@@ -86,13 +87,27 @@ void SwapFont(const char* filepath, bool swap_unkno) {
 	*data = (void*)((uint32_t)(iov.iov_base) + 0x4);
 }
 
-__attribute__((used)) bool ParseCustomUppercaseTextTags(const char* tag, const char** tag_params, struct dialogue_display_state* state, int tag_param_count) {
+/*
+	Parses custom uppercase text tags.
+		- "VS:X:Y" ("VITESSE") modifies text speed by X/Y. For example, "[VS:1:2]" halves speed, but "[VS:4]" quadruples it. The second parameter is optional, and if missing, will default to 1.
+		- "VR" reverts text speed to normal (equivalent to "[VS:1:1]" and "[VS:1]").
+		- "VAR:X:Y:Z" ("VARIABLE") sets script variable X at index Z to the value Y. The third parameter is optional, and if missing, will default to 0.
+		- "U:X" ("UNLOCK") unlocks the the Xth scripting lock. 
+		
+	To ignore a text tag in a textbox that doesn't scroll, check for dialogue_display_state::flags.timer_2.
+*/
+__attribute__((used)) bool ParseCustomUppercaseTextTags(struct dialogue_display_state* state, const char* tag, const char** tag_params, int tag_param_count) {
 	int tag_vals[4] = {0};
+	if(tag_param_count > ARRAY_LENGTH(tag_vals))
+		tag_param_count = ARRAY_LENGTH(tag_vals);
+		
 	for(int i = 0; i < tag_param_count; i++)
 		tag_vals[i] = AtoiTag(tag_params[i]);
 		
 	// Checking for an actual tag...
 	if(StrcmpTag(tag, "VS")) {
+		if(state->flags.timer_2)
+			return true;
 		if(tag_param_count > 0) {
 			text_numerator = tag_vals[0];
 			text_denominator = tag_param_count == 1 ? 1 : tag_vals[1];
@@ -102,11 +117,15 @@ __attribute__((used)) bool ParseCustomUppercaseTextTags(const char* tag, const c
 		return true;
 	}
 	else if(StrcmpTag(tag, "VR")) {
+		if(state->flags.timer_2)
+			return true;
 		ResetTextSpeedValues();
 		state->text_scrolling_done = 0;
 		return true;
 	}
 	else if(StrcmpTag(tag, "VAR")) {
+		if(state->flags.timer_2)
+			return true;
 		if(tag_param_count >= 2) { // NOT >= 3 on purpose!
 			// VAR:X:Y:Z
 			// Set script variable X[Z] = Y
@@ -116,6 +135,8 @@ __attribute__((used)) bool ParseCustomUppercaseTextTags(const char* tag, const c
 		return true;
 	}
 	else if(StrcmpTag(tag, "U")) {
+		if(state->flags.timer_2)
+			return true;
 		if(OverlayIsLoaded(OGROUP_OVERLAY_11))
 			UnlockScriptingLock(tag_vals[0]);
 		return true;

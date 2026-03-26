@@ -28,13 +28,17 @@ CreatePortraitBoxCallsite = 0x02035118;
 CreateDefaultDialogueBoxCallsite = 0x0203512C;
 PlayBgmCheck = 0x02019948;
 PlayBgm2Check = 0x02019E14;
-ChangeVolumeBgm = 0x02017f64;
+ChangeVolumeBgm = 0x02017F64;
+ChangeVolumeBgm2 = 0x02018194;
 StopBgm = 0x02019b28;
 UppercaseTextTagFatalError = 0x02021A10;
 AfterUppercaseTagIsFound = 0x02021AA0;
 GetTextSpeed = 0x02020ED0;
 DoTextLoop = 0x02020EE0;
 AnalyzeTextReturn = 0x02021EC8;
+PlayBgm2ByIdVolumeVeneer = 0x02017BE0;
+ChangeSeVolumeVeneer = 0x020183A0;
+SoundStop = 0x02017AB0;
 TEXTBOX_COLOR_ATTRIBUTES = 0x02027800;
 
 /* !file ram */

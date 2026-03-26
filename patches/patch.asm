@@ -30,9 +30,9 @@
 	
 	.org UppercaseTextTagFatalError
 	.area 0x28
-		ldr r0,[r13,#0x70] ; tag string
-		add r1,r13,#0x74 ; pointer to tag params
-		mov r2,r4 ; pointer to dialogue_display_state
+		mov r0,r4 ; dialogue_display_state pointer
+		ldr r1,[r13,#0x70] ; tag string
+		add r2,r13,#0x74 ; the rest of the tag params
 		sub r3,r6,#0x1 ; tag count
 		bl ParseCustomUppercaseTextTags
 		cmp r0,#0x0

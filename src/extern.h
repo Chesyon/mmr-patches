@@ -61,7 +61,11 @@ struct font_data {
 };
 
 // Symbols not yet documented on pmdsky-debug
+extern void PlayBgm2ByIdVolumeVeneer(enum music_id music_id, int duration, int volume);
+extern void ChangeSeVolumeVeneer(int se_id, int duration, int volume);
 extern void ChangeVolumeBgm(int duration, int volume);
+extern void ChangeVolumeBgm2(int duration, int volume);
+extern void SoundStop(void);
 extern void TextboxSolid(void);
 extern void TextboxTransparent(void);
 extern void GetSceneName(char *dst, char *src);
