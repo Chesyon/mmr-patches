@@ -13,6 +13,8 @@ CreateLivePerformer = 0x022FD72C;
 AfterAttributeBitfieldSwitchCase = 0x022F816C;
 DefaultActorTypeBranch = 0x022F80D0;
 ShouldReloadCachedScene = 0x022E573C;
+CreateSaveMenuCallsite = 0x022E670C;
+CreateDayCareMenuCallsite = 0x022E63D0;
 
 /* !file arm9 */
 ShowKeyboardTypeCase3 = 0x02036914;

@@ -96,7 +96,7 @@ void SwapFont(const char* filepath, bool swap_unkno) {
 		
 	To ignore a text tag in a textbox that doesn't scroll, check for dialogue_display_state::flags.timer_2.
 */
-__attribute__((used)) bool ParseCustomUppercaseTextTags(struct dialogue_display_state* state, const char* tag, const char** tag_params, int tag_param_count) {
+__attribute((used)) bool ParseCustomUppercaseTextTags(struct dialogue_display_state* state, const char* tag, const char** tag_params, int tag_param_count) {
 	int tag_vals[4] = {0};
 	if(tag_param_count > ARRAY_LENGTH(tag_vals))
 		tag_param_count = ARRAY_LENGTH(tag_vals);

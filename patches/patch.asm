@@ -71,6 +71,16 @@
 	.area 0x4
 		b ManipulateActorLayering
 	.endarea
+	
+	.org CreateSaveMenuCallsite
+	.area 0x4
+		bl CardPullOut
+	.endarea
+	
+	.org CreateDayCareMenuCallsite
+	.area 0x4
+		bl CardPullOut
+	.endarea
 .close
 
 .open "overlay34.bin", overlay34_start
