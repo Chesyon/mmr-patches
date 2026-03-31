@@ -54,8 +54,8 @@ struct performer_spawn {
 struct font_data {
     void* kanji_rd_data;
     void* unkno_rd_data;
-    undefined4 unk_0x8;
-    undefined4 unk_0xC;
+    int kanji_rd_height;
+    int unkno_rd_height;
     void* kanji_rd_base;
     void* unkno_rd_base;
 };
