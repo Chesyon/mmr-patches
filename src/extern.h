@@ -83,3 +83,10 @@ extern SECTION_TEXT_PLAYBILL void ClosePlaybill(void);
 extern SECTION_TEXT_PLAYBILL bool UpdateSceneSelectorMenu(void);
 
 extern int last_selected_scene;
+
+//Touchscreen Stuff
+extern uint8_t TSXPosLive;
+extern uint8_t TSYPosLive;
+extern uint8_t TSXPosLastMitDrag;
+extern uint8_t TSYPosLastMitDrag;
+extern uint8_t TSPressed;

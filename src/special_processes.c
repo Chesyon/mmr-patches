@@ -1,6 +1,7 @@
 #include <pmdsky.h>
 #include <cot.h>
 #include "extern.h"
+#include "memory.h"
 
 // Special process 100: Change border color
 // Based on https://github.com/SkyTemple/eos-move-effects/blob/master/example/process/set_frame_color.asm
@@ -88,6 +89,35 @@ bool CustomScriptSpecialProcessCall(struct script_routine* routine, uint32_t spe
       return true;
     case 105:
       *return_val = SpSwapFont(routine, arg1, arg2);
+      return true;
+    case 106:
+      switch (arg2){
+        case 1:
+          randomisation();
+          break;
+        case 2:
+          *return_val = getCardPosition(arg1);
+          break;
+        case 3:
+          *return_val = checkSelectedCard();
+          break;
+        case 4:
+          *return_val = checkPaar();
+          break;
+        case 5:
+          fuellBekanntArray();
+          botZug();
+          break;
+        case 6:
+          *return_val = checkEnde();
+          break;
+        case 7:
+          getKartenWerte();
+          break;
+        case 8:
+          getKarteEinsWert();
+          break;
+      }
       return true;
     default:
       return false;
