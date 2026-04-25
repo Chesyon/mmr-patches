@@ -41,6 +41,7 @@ AnalyzeTextReturn = 0x02021EC8;
 PlayBgm2ByIdVolumeVeneer = 0x02017BE0;
 ChangeSeVolumeVeneer = 0x020183A0;
 SoundStop = 0x02017AB0;
+GetOptionsMenuAllChoices = 0x0202d5b0;
 TEXTBOX_COLOR_ATTRIBUTES = 0x02027800;
 
 /* !file ram */

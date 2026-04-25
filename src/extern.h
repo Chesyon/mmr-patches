@@ -3,6 +3,7 @@
 #include <pmdsky.h>
 #include <cot.h>
 
+#define EVENT_FINISHED 0
 #define SECTION_TEXT_PLAYBILL __attribute__((section(".text.playbill"))) __attribute((used))
 #define SECTION_DATA_PLAYBILL __attribute__((section(".data.playbill"))) __attribute((used))
 
@@ -11,6 +12,12 @@
 #define TEXT_STRING_MYSTERYMAIL_BLURB 8736
 #define TEXT_STRING_PARTICIPANT_NAME_START 8737
 #define TEXT_STRING_PLAY_SCENE_QUESTION 8763
+#define TEXT_STRING_MAIN_MENU_TITLE 8765
+#define TEXT_STRING_MAIN_MENU_OPTION_NAME_START 8766
+#define TEXT_STRING_FLAVOR_BLURB 8770
+#define TEXT_STRING_SCENE_STARTER_TITLE 8771
+#define TEXT_STRING_SCENE_STARTER_DESC 8772
+#define TEXT_STRING_SCENE_STARTER_CHOICES 8773
 
 // Layouts for portraits
 enum portrait_layout_types {
@@ -70,6 +77,7 @@ extern void TextboxSolid(void);
 extern void TextboxTransparent(void);
 extern void GetSceneName(char *dst, char *src);
 extern int CreateLivePerformer(int follow_idx, struct performer_spawn *performer_spawn, int hanger, int sector, bool attribute_flag);
+extern void GetOptionsMenuAllChoices(int window_id, int* buf);
 extern struct rgba TEXTBOX_COLOR_ATTRIBUTES;
 extern struct font_data FONT_DATA;
 
@@ -81,6 +89,9 @@ extern bool SpResetTextboxColor(void);
 extern SECTION_TEXT_PLAYBILL void CreatePlaybill(void);
 extern SECTION_TEXT_PLAYBILL void ClosePlaybill(void);
 extern SECTION_TEXT_PLAYBILL bool UpdateSceneSelectorMenu(void);
+extern SECTION_TEXT_PLAYBILL void CreateEnvelope(void);
+extern SECTION_TEXT_PLAYBILL void CloseEnvelope(void);
+extern SECTION_TEXT_PLAYBILL bool UpdateMysteryMailMenu(void);
 
 extern int last_selected_scene;
 

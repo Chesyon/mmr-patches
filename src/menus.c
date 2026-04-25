@@ -18,7 +18,7 @@ bool UpdateSimpleKeyboardMenu(void) {
     return IS_BASE_GAME_MENU_FINISHED;
 }
 
-// The Scene Selector logic is mostly handled in the dedicated "playbill.c" file, which has code in Overlay24.
+// The Scene Selector and Main Menu logic is mostly handled in the dedicated "playbill.c" file, which has code in Overlay24.
 void CreateSceneSelectorMenu(void) {
     LoadOverlay(OGROUP_OVERLAY_24);
     CreatePlaybill();
@@ -28,6 +28,18 @@ void CloseSceneSelectorMenu(void) {
     ClosePlaybill();
     UnloadOverlay(OGROUP_OVERLAY_24);
 }
+
+#if EVENT_FINISHED
+void CreateMysteryMailMenu(void) {
+    LoadOverlay(OGROUP_OVERLAY_24);
+    CreateEnvelope();
+}
+
+void CloseMysteryMailMenu(void) {
+    CloseEnvelope();
+    UnloadOverlay(OGROUP_OVERLAY_24);
+}
+#endif
 
 
 // Add your custom script menus to the list below.
@@ -40,14 +52,18 @@ void CloseSceneSelectorMenu(void) {
 //
 // Refer to menus.h for more information on the fields of `custom_menu` and `global_menu_info`!
 __attribute((used)) struct custom_menu CUSTOM_MENUS[] = {
-    // ID 80
-    // Attempts to add a chosen Pokémon as a new member of Chimecho Assembly!
-    // Returns: Chimecho Assembly index of the new recruit if successful. -1 if the player exits the menu, -2 if a new recruit could not be added.
     {
         .create = CreateSceneSelectorMenu,
         .close = CloseSceneSelectorMenu,
         .update = UpdateSceneSelectorMenu
+    },
+    #if EVENT_FINISHED
+    {
+        .create = CreateMysteryMailMenu,
+        .close = CloseMysteryMailMenu,
+        .update = UpdateMysteryMailMenu
     }
+    #endif
 };
 
 struct global_menu_info GLOBAL_MENU_INFO;
