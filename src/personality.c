@@ -14,7 +14,7 @@ __attribute__((used)) int CustomGetPersonality() {
 
 __attribute__((used)) void TryRandomizePartnerFirstKind() {
     if(LoadScriptVariableValue(NULL, VAR_PARTNER_FIRST_KIND) == 0){
-        int species = 100 + RandInt(16); // first monster
+        int species = 1200 + RandInt(16); // first monster
         SaveScriptVariableValue(NULL, VAR_PARTNER_FIRST_KIND, species);
     }
 }
