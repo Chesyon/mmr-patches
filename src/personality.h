@@ -129,4 +129,6 @@ struct quiz_answer_association {
 };
 ASSERT_SIZE(struct quiz_answer_association, 2);
 
+extern void FadeOutBgm(int duration);
+extern struct monster_id_16 HEROS[16][2];
 extern struct personality_test* PERSONALITY_TEST_PTR;
