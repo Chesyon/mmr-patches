@@ -58,7 +58,7 @@
         b     PersonalityAfterScoring // Done increasing scores!
 
     .org PersonalityQuestionCount
-        cmp r2,#2 // 40 total questions
+        cmp r2,#40 // 40 total questions
 
     .org PersonalityAssignVar
         bl AssignPartnerFirstKind
