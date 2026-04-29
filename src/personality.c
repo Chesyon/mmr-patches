@@ -23,3 +23,11 @@ __attribute__((used)) void AssignPartnerFirstKind() {
     SaveScriptVariableValue(NULL, VAR_PARTNER_FIRST_KIND, HEROS[GetPersonality()][0].val);
     FadeOutBgm(0xb4); // originalish instruction
 }
+
+void __attribute__((naked)) InsertActorSpecies() {
+  // run NPC_PARTNER_FIRST behavior for actor 424
+  asm("cmp lr,#424");
+  asm("beq PartnerFirstKind");
+  asm("cmp lr,#0x35"); // original instruction
+  asm("b InsertActorSpeciesRet");
+}

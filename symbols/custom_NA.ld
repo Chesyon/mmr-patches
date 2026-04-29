@@ -46,9 +46,10 @@ TEXTBOX_COLOR_ATTRIBUTES = 0x02027800;
 
 /* PERSONALITY */
 FadeOutBgm = 0x2017F28; /* EU: 0x2017FC4 */ 
-PersonalityPartnerNameHook = 0x2023E48; /* EU 0x20240A8 */ 
-PersonalityPartnerNameSkip = 0x2023E70; /* EU: 0x20240D0 */
 PersonalityPartnerInit = 0x204B290; /* EU: 0x204B5C8 */
+InsertActorSpeciesHook = 0x20656B4; /* EU: 0x2065A30 */
+InsertActorSpeciesRet = 0x20656B8; /* EU: 0x2065A34 */
+PartnerFirstKind = 0x2065808; /* EU: 0x2065B84 */ 
 /* PersonalityTestMainManager tweaks - EU: +0xB40 */
 PersonalityScoreInit = 0x238A7E4;
 PersonalityResetR9Hook = 0x238A80C;

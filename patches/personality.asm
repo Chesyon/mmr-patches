@@ -2,11 +2,11 @@
 .include "symbols.asm"
 
 .open "arm9.bin", arm9_start
-    .org PersonalityPartnerNameHook
-        b PersonalityPartnerNameSkip // skip special name behavior for PARTNER_FIRST
-
     .org PersonalityPartnerInit
         bl TryRandomizePartnerFirstKind
+    
+    .org InsertActorSpeciesHook
+        b InsertActorSpecies
 .close
 
 .open "overlay13.bin", overlay13_start
