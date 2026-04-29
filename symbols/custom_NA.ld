@@ -49,7 +49,6 @@ FadeOutBgm = 0x2017F28; /* EU: 0x2017FC4 */
 PersonalityPartnerNameHook = 0x2023E48; /* EU 0x20240A8 */ 
 PersonalityPartnerNameSkip = 0x2023E70; /* EU: 0x20240D0 */
 PersonalityPartnerInit = 0x204B290; /* EU: 0x204B5C8 */
-PersonalityPartnerColor = 0x2099D68; /* EU: 0x209A28C */
 /* PersonalityTestMainManager tweaks - EU: +0xB40 */
 PersonalityScoreInit = 0x238A7E4;
 PersonalityResetR9Hook = 0x238A80C;

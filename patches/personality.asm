@@ -7,9 +7,6 @@
 
     .org PersonalityPartnerInit
         bl TryRandomizePartnerFirstKind
-
-    .org PersonalityPartnerColor
-        .byte 0x59 // partner can have hero name color, as a treat
 .close
 
 .open "overlay13.bin", overlay13_start
